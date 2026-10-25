@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocuQuery</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=2">
+</head>
+<body>
+    <main class="container">
+        <h1>DocuQuery</h1>
+        <p class="subtitle">Upload a PDF and ask questions grounded in the document.</p>
+
+        <section class="card" id="upload-section">
+            <div id="drop-zone" role="button" tabindex="0" aria-label="Upload PDF">
+                <div class="icon" aria-hidden="true">↑</div>
+                <strong>Drag &amp; drop your PDF here, or <span>browse files</span></strong>
+                <p>Max 20MB · PDF only</p>
+            </div>
+            <input type="file" id="file-input" accept=".pdf" hidden>
+
+            <div id="progress-wrap">
+                <div id="progress-bar">
+                    <div id="progress-fill"></div>
+                </div>
+                <p id="progress-label"></p>
+            </div>
+
+            <div id="doc-badge">
+                <div class="icon" aria-hidden="true">PDF</div>
+                <div class="name"></div>
+                <div class="chunks"></div>
+                <a class="change-btn" href="#" onclick="resetSession(); return false;">Change</a>
+            </div>
+        </section>
+
+        <section class="card" id="chat-section">
+            <div id="chat-window">
+                <div id="spinner">Thinking…</div>
+            </div>
+
+            <div class="input-row">
+                <textarea id="chat-input" rows="1" placeholder="Ask a question about the PDF"></textarea>
+                <button id="send-btn" type="button" onclick="sendMessage()">Ask</button>
+            </div>
+
+            <div class="input-footer">
+                <span>Enter to send · Shift+Enter for new line</span>
+                <button type="button" onclick="resetSession()">New document</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}?v=2"></script>
+</body>
+</html>
